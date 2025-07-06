@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# VSCode settings
+.vscode/
+
+# Environment folders
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Playwright test artifacts (optional)
+test-results/
+playwright-report/
+
+# Log files
+*.log
