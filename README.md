@@ -1,21 +1,41 @@
-🎵 SongMate
-SongMate is an API-based music companion tool built with FastAPI that enables users to:
+# 🎵 SongMate
 
-  ==> 🎶 Download audio from YouTube videos and playlists as MP3 files using yt-dlp.
+**SongMate** is a FastAPI-powered music companion API that lets users:
+- 🎧 Download audio from YouTube videos and playlists in MP3 format using `yt-dlp`.
+- 📝 Fetch song lyrics from Genius.com using advanced web scraping with **Playwright** and fallback search parsing.
 
-  ==> 📝 Fetch song lyrics from Genius.com using headless browsing and web scraping (Playwright / DuckDuckGo parsing).
+The project is containerized with **Docker**, making it easy to deploy on platforms like Google Cloud Run, AWS, or Render.
 
-  ==> 📂 Provide clean, ready-to-use download links through a simple API interface.
+---
 
-The project uses Docker for containerized deployment, making it portable and production-ready.
+## 🚀 Key Features
 
-🔑 Key Features:
-  🔍 Song lyrics scraping using Playwright or fallback DuckDuckGo parsing to bypass bot detection.
+- 🔍 **Dynamic Lyrics Scraping:** Uses Playwright to scrape Genius.com directly. If blocked (e.g., CAPTCHA), falls back to DuckDuckGo search scraping.
+- 🎶 **Audio Downloading:** Supports both single video and playlist downloads from YouTube, converting them into MP3.
+- ⚙️ **Clean REST API:** Built with FastAPI for modular and maintainable backend development.
+- 🐳 **Containerized Deployment:** Dockerized for easy portability and deployment.
+- 🛡️ **Robust Error Handling:** Gracefully handles search failures, scraping blocks, and missing data.
 
-  🎧 Supports both single song and full playlist audio downloads.
+---
 
-  ⚙️ FastAPI backend for scalable and maintainable API development.
+## 🛠️ Tech Stack
 
-  🐳 Dockerized for quick deployment on cloud platforms like Google Cloud Run.
+| Component            | Technology         |
+|----------------------|--------------------|
+| **Backend**          | FastAPI            |
+| **Lyrics Scraping**  | Playwright, DuckDuckGo (BeautifulSoup) |
+| **Audio Downloads**  | yt-dlp, ffmpeg     |
+| **Containerization** | Docker             |
+| **Deployment Ready** | Google Cloud Run / Render / AWS |
 
-  📦 Error handling for production-grade reliability.
+---
+
+## 📂 API Endpoints
+
+| Method | Endpoint            | Description                                |
+|-------|----------------------|--------------------------------------------|
+| POST  | `/download/single`    | Download a single YouTube video as MP3     |
+| POST  | `/download/playlist`  | Download a full playlist as MP3 zip file   |
+| GET   | `/song/lyrics`        | Get lyrics of a song from Genius.com       |
+
+---
