@@ -4,8 +4,8 @@ import zipfile
 import shutil
 from typing import Tuple
 
-DOWNLOAD_DIR = "./downloads"
-ZIP_DIR = "./zips"
+DOWNLOAD_DIR = ".songMate/downloads"
+ZIP_DIR = ".songMate/zips"
 
 
 def download_single_audio(url: str) -> str:
@@ -47,7 +47,7 @@ def download_playlist_audio(url: str) -> Tuple[str, str]:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(url, download=True)
 
-        # ✅ Get playlist title safely
+        
         playlist_title = info.get('title', 'playlist').replace(" ", "_").replace("/", "_")
 
         if 'entries' in info:
@@ -58,7 +58,7 @@ def download_playlist_audio(url: str) -> Tuple[str, str]:
             title = info.get('title', 'downloaded_song')
             downloaded_files.append(os.path.join(DOWNLOAD_DIR, f"{title}.mp3"))
 
-    # ✅ Create the ZIP file
+    
     os.makedirs(ZIP_DIR, exist_ok=True)
     zip_path = os.path.join(ZIP_DIR, f"{playlist_title}.zip")
     with zipfile.ZipFile(zip_path, "w") as zipf:
@@ -69,7 +69,7 @@ def download_playlist_audio(url: str) -> Tuple[str, str]:
 
 
 def cleanup_temp_files():
-    # ✅ Safely remove the downloads and zips folders
+    
     if os.path.exists(DOWNLOAD_DIR):
         shutil.rmtree(DOWNLOAD_DIR, ignore_errors=True)
     if os.path.exists(ZIP_DIR):
